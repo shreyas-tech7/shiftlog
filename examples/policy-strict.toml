@@ -1,0 +1,20 @@
+# Strict: few sessions, one failure asks a human, flaky-check guard on.
+[budget]
+max_sessions = 6
+max_wall_seconds = 600
+session_timeout_seconds = 60
+max_tokens = 200000
+backoff_seconds = 1
+backoff_max_seconds = 8
+
+[gates]
+max_consecutive_failures = 1
+evaluator = true
+evaluator_runs = 2
+
+[commands]
+forbidden = ["git push", "git remote", "git config", "git commit", "git reset", "git checkout", "pip install", "npm install", "sudo"]
+allow_network = false
+
+[paths]
+forbidden = ["feature_list.json", "init.sh", ".gitignore", ".github/**", "tests/**"]

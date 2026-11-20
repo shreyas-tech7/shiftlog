@@ -1,0 +1,206 @@
+[
+  {
+    "id": "F01",
+    "area": "init",
+    "description": "Initializer: plain spec to feature_list.json (passes false, test steps), PROGRESS.md, init.sh and a first commit",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_init.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F02",
+    "area": "core",
+    "description": "One subprocess helper with a required timeout, and a source scan test that fails on any process start outside it",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_proc.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F03",
+    "area": "tests",
+    "description": "Temp-repo test fixture with pinned git config (GIT_CONFIG_GLOBAL in a temp file), every test in a temp directory",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_init.py::test_pinned_git_ignores_machine_config"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F04",
+    "area": "policy",
+    "description": "policy.toml parser (budgets, rules) with strict errors, plus example policy files",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_policy.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F05",
+    "area": "worker",
+    "description": "Fake worker with scripted edits and scripted faults",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'happy or claim_done or second_feature'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F06",
+    "area": "loop",
+    "description": "Session loop state machine as an explicit table, each transition tested, including stop and pending-approval states",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_machine.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F07",
+    "area": "loop",
+    "description": "Commit on pass, revert on fail: after a failed session the working tree matches the last commit",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'revert'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F08",
+    "area": "gates",
+    "description": "Command shims and the forbidden-command and network gates",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_shim.py",
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'forbidden_command or network'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F09",
+    "area": "gates",
+    "description": "Forbidden-path gate (stops self-grading) and tamper gate",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'forbidden_path or audit_log'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F10",
+    "area": "evaluator",
+    "description": "Separate evaluator command reruns checks in a clean clone; disagreement fires a gate",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'evaluator'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F11",
+    "area": "gates",
+    "description": "Budgets (sessions, tokens, wall time, backoff) and session timeout",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'budget or timeout or backoff'"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F12",
+    "area": "gates",
+    "description": "Checks-fail-twice gate and the approval gate with approve and reject",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_loop.py -k 'twice or approve or pending'",
+      ".venv/bin/python -m pytest -q tests/test_cli.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F13",
+    "area": "audit",
+    "description": "JSON Lines audit log with a hash chain; an edit to an earlier line is detected",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_audit.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F14",
+    "area": "report",
+    "description": "Daily report in Markdown, readable in two minutes",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_report.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F15",
+    "area": "safety",
+    "description": "Every subprocess has a timeout, tests run offline (network guard proven) and in temp directories",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_proc.py tests/test_network_guard.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F16",
+    "area": "bench",
+    "description": "Benchmark of 30 specs with and without the evaluator: completion rate, wasted sessions, gate triggers",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_bench.py",
+      "test -f results/bench-seed1.json && test -f results/bench-seed2.json"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F17",
+    "area": "docs",
+    "description": "README generated from results, says the benchmark injects scripted faults into a fake worker",
+    "steps": [
+      ".venv/bin/gatedcrew readme --check",
+      ".venv/bin/python -m pytest -q tests/test_readme.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F18",
+    "area": "quality",
+    "description": "Quality bar: README parts, CI and badge, topics, social preview, static demo page, DEMO.md, links check, LICENSE, CHANGELOG, CONTRIBUTING, issue templates, safety page",
+    "steps": [
+      ".venv/bin/python scripts/check_links.py",
+      ".venv/bin/python -m pytest -q tests/test_repo.py"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F19",
+    "area": "docs",
+    "description": "Study-later kit: WALKTHROUGH, INTERVIEW_QA, DECISIONS",
+    "steps": [
+      ".venv/bin/python -m pytest -q tests/test_repo.py -k study"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F20",
+    "area": "release",
+    "description": "Release check: review, security audit, gitleaks, pip-audit, ruff S, actionlint, humanizer pass, outside check",
+    "steps": [
+      "test -f docs/RELEASE_CHECK.md"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F21",
+    "area": "release",
+    "description": "Hand-off: CHANGELOG with release SHA, HUMAN_STEPS, COWORK_PROMPT",
+    "steps": [
+      "grep -q 'v0.1.0-rc1' CHANGELOG.md",
+      "test -f docs/handoff/COWORK_PROMPT.md"
+    ],
+    "passes": false
+  },
+  {
+    "id": "F22",
+    "area": "all",
+    "description": "All tests pass offline with the fake worker only",
+    "steps": [
+      "./init.sh"
+    ],
+    "passes": false
+  }
+]

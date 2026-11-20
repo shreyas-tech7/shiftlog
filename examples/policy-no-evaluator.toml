@@ -1,0 +1,3 @@
+# The benchmark's control arm: the worker's own check run is trusted. Do not use this for real runs.
+[gates]
+evaluator = false
