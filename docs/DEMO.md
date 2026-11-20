@@ -49,13 +49,13 @@ run state: DONE
 $ gatedcrew verify --work work
 OK 12 lines, chain intact
 $ git -C work log --format='%h %s'
-6b26106 F03: multiply two numbers (session 6)
-255d71c candidate F03 (session 6)
-0918e01 F02: subtract two numbers (session 4)
-53c1e45 candidate F02 (session 4)
-05f9ef2 F01: add two numbers (session 2)
-2e5d0f3 candidate F01 (session 2)
-c05e8ab gatedcrew init: tiny-calc
+c67de6c F03: multiply two numbers (session 6)
+efb1f4d candidate F03 (session 6)
+c8bb37a F02: subtract two numbers (session 4)
+b8f4336 candidate F02 (session 4)
+3135bc0 F01: add two numbers (session 2)
+c0db33e candidate F01 (session 2)
+c96556f gatedcrew init: tiny-calc
 $ gatedcrew report --work work
 # gatedcrew daily report: tiny-calc
 

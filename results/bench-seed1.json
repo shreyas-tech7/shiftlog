@@ -7,7 +7,7 @@
     "python": "3.13.18",
     "cores_used": 1
   },
-  "total_seconds": 70.8,
+  "total_seconds": 75.2,
   "fault_weights_first_attempt": {
     "none": 0.4,
     "break": 0.15,
@@ -54,8 +54,8 @@
       "gate_triggers_total": 44,
       "budget_stops": 1,
       "sessions_per_completed_feature": 1.658,
-      "tokens_per_completed_feature": 9011482.0,
-      "seconds_per_spec": 1.34,
+      "tokens_per_completed_feature": 2473.0,
+      "seconds_per_spec": 1.41,
       "logs_intact": true
     },
     "without_evaluator": {
@@ -85,8 +85,8 @@
       "gate_triggers_total": 31,
       "budget_stops": 1,
       "sessions_per_completed_feature": 1.7,
-      "tokens_per_completed_feature": 10002535.0,
-      "seconds_per_spec": 0.76,
+      "tokens_per_completed_feature": 2535.0,
+      "seconds_per_spec": 0.83,
       "logs_intact": true
     }
   },
@@ -106,7 +106,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 0.93,
+      "tokens_without_burn": 7500,
+      "seconds": 0.89,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -129,7 +130,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 0.51,
+      "tokens_without_burn": 7500,
+      "seconds": 0.52,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -153,7 +155,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 15000,
-      "seconds": 2.16,
+      "tokens_without_burn": 15000,
+      "seconds": 2.03,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",
@@ -178,7 +181,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 10500,
-      "seconds": 0.74,
+      "tokens_without_burn": 10500,
+      "seconds": 0.84,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",
@@ -204,7 +208,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 9000,
-      "seconds": 1.12,
+      "tokens_without_burn": 9000,
+      "seconds": 1.19,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_command",
@@ -229,7 +234,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 9000,
-      "seconds": 0.64,
+      "tokens_without_burn": 9000,
+      "seconds": 0.71,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_command",
@@ -251,7 +257,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.83,
+      "tokens_without_burn": 6000,
+      "seconds": 1.0,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -273,7 +280,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.4,
+      "tokens_without_burn": 6000,
+      "seconds": 0.49,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -297,7 +305,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 9000,
-      "seconds": 1.3,
+      "tokens_without_burn": 9000,
+      "seconds": 1.41,
       "log_ok": true,
       "faults_drawn": {
         "F01": "claim_done",
@@ -319,7 +328,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 7500,
-      "seconds": 0.51,
+      "tokens_without_burn": 7500,
+      "seconds": 0.63,
       "log_ok": true,
       "faults_drawn": {
         "F01": "claim_done",
@@ -346,7 +356,8 @@
       "final": "STOPPED",
       "approvals": 4,
       "tokens": 13500,
-      "seconds": 1.62,
+      "tokens_without_burn": 13500,
+      "seconds": 1.78,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -372,7 +383,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 12000,
-      "seconds": 0.94,
+      "tokens_without_burn": 12000,
+      "seconds": 1.02,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -397,7 +409,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 12000,
-      "seconds": 1.27,
+      "tokens_without_burn": 12000,
+      "seconds": 1.41,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -421,7 +434,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 12000,
-      "seconds": 0.85,
+      "tokens_without_burn": 12000,
+      "seconds": 1.03,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -446,7 +460,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 13500,
-      "seconds": 1.79,
+      "tokens_without_burn": 13500,
+      "seconds": 2.18,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -472,7 +487,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 12000,
-      "seconds": 0.89,
+      "tokens_without_burn": 12000,
+      "seconds": 1.06,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -498,7 +514,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 7500,
-      "seconds": 0.99,
+      "tokens_without_burn": 7500,
+      "seconds": 1.32,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -521,7 +538,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 6000,
-      "seconds": 0.41,
+      "tokens_without_burn": 6000,
+      "seconds": 0.48,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -544,7 +562,8 @@
       "final": "STOPPED",
       "approvals": 0,
       "tokens": 1000004500,
-      "seconds": 0.89,
+      "tokens_without_burn": 4500,
+      "seconds": 0.96,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -569,7 +588,8 @@
       "final": "STOPPED",
       "approvals": 0,
       "tokens": 1000004500,
-      "seconds": 0.42,
+      "tokens_without_burn": 4500,
+      "seconds": 0.5,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -592,7 +612,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 9000,
-      "seconds": 1.16,
+      "tokens_without_burn": 9000,
+      "seconds": 1.29,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -614,7 +635,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 9000,
-      "seconds": 0.65,
+      "tokens_without_burn": 9000,
+      "seconds": 0.68,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -638,7 +660,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 9000,
-      "seconds": 1.25,
+      "tokens_without_burn": 9000,
+      "seconds": 1.24,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -662,7 +685,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 9000,
-      "seconds": 0.69,
+      "tokens_without_burn": 9000,
+      "seconds": 0.79,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -687,7 +711,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 10500,
-      "seconds": 1.49,
+      "tokens_without_burn": 10500,
+      "seconds": 1.41,
       "log_ok": true,
       "faults_drawn": {
         "F01": "network",
@@ -712,7 +737,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 10500,
-      "seconds": 0.83,
+      "tokens_without_burn": 10500,
+      "seconds": 0.82,
       "log_ok": true,
       "faults_drawn": {
         "F01": "network",
@@ -736,7 +762,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 12000,
-      "seconds": 1.59,
+      "tokens_without_burn": 12000,
+      "seconds": 1.58,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -761,7 +788,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 12000,
-      "seconds": 0.94,
+      "tokens_without_burn": 12000,
+      "seconds": 1.04,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -787,7 +815,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 10500,
-      "seconds": 5.26,
+      "tokens_without_burn": 10500,
+      "seconds": 5.27,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",
@@ -810,7 +839,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 4.49,
+      "tokens_without_burn": 7500,
+      "seconds": 4.54,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",
@@ -834,7 +864,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 9000,
-      "seconds": 1.28,
+      "tokens_without_burn": 9000,
+      "seconds": 1.31,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -858,7 +889,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 0.55,
+      "tokens_without_burn": 7500,
+      "seconds": 0.61,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -880,7 +912,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.94,
+      "tokens_without_burn": 6000,
+      "seconds": 0.98,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -902,7 +935,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.45,
+      "tokens_without_burn": 6000,
+      "seconds": 0.46,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -926,7 +960,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 9000,
-      "seconds": 1.25,
+      "tokens_without_burn": 9000,
+      "seconds": 1.19,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -950,7 +985,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 9000,
-      "seconds": 0.76,
+      "tokens_without_burn": 9000,
+      "seconds": 0.77,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -975,7 +1011,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 9000,
-      "seconds": 1.05,
+      "tokens_without_burn": 9000,
+      "seconds": 1.09,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -999,7 +1036,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 9000,
-      "seconds": 0.66,
+      "tokens_without_burn": 9000,
+      "seconds": 0.65,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -1023,7 +1061,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 7500,
-      "seconds": 0.99,
+      "tokens_without_burn": 7500,
+      "seconds": 1.09,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -1046,7 +1085,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 6000,
-      "seconds": 0.43,
+      "tokens_without_burn": 6000,
+      "seconds": 0.46,
       "log_ok": true,
       "faults_drawn": {
         "F01": "forbidden_path",
@@ -1069,7 +1109,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 13500,
-      "seconds": 1.72,
+      "tokens_without_burn": 13500,
+      "seconds": 1.89,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -1092,7 +1133,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 12000,
-      "seconds": 0.9,
+      "tokens_without_burn": 12000,
+      "seconds": 1.02,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -1115,7 +1157,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.74,
+      "tokens_without_burn": 6000,
+      "seconds": 0.76,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1136,7 +1179,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.42,
+      "tokens_without_burn": 6000,
+      "seconds": 0.49,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1160,7 +1204,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 10500,
-      "seconds": 1.49,
+      "tokens_without_burn": 10500,
+      "seconds": 1.32,
       "log_ok": true,
       "faults_drawn": {
         "F01": "claim_done",
@@ -1185,7 +1230,8 @@
       "final": "DONE",
       "approvals": 2,
       "tokens": 10500,
-      "seconds": 0.74,
+      "tokens_without_burn": 10500,
+      "seconds": 0.84,
       "log_ok": true,
       "faults_drawn": {
         "F01": "claim_done",
@@ -1209,7 +1255,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 1.05,
+      "tokens_without_burn": 7500,
+      "seconds": 0.99,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -1230,7 +1277,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.41,
+      "tokens_without_burn": 6000,
+      "seconds": 0.5,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -1253,6 +1301,7 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
+      "tokens_without_burn": 7500,
       "seconds": 0.91,
       "log_ok": true,
       "faults_drawn": {
@@ -1276,7 +1325,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 0.53,
+      "tokens_without_burn": 7500,
+      "seconds": 0.56,
       "log_ok": true,
       "faults_drawn": {
         "F01": "break",
@@ -1297,7 +1347,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 4500,
-      "seconds": 0.64,
+      "tokens_without_burn": 4500,
+      "seconds": 0.76,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1318,7 +1369,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 4500,
-      "seconds": 0.32,
+      "tokens_without_burn": 4500,
+      "seconds": 0.35,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1342,7 +1394,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 10500,
-      "seconds": 1.16,
+      "tokens_without_burn": 10500,
+      "seconds": 1.32,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1366,7 +1419,8 @@
       "final": "DONE",
       "approvals": 3,
       "tokens": 10500,
-      "seconds": 0.85,
+      "tokens_without_burn": 10500,
+      "seconds": 0.95,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1387,7 +1441,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.91,
+      "tokens_without_burn": 6000,
+      "seconds": 0.97,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1409,7 +1464,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.45,
+      "tokens_without_burn": 6000,
+      "seconds": 0.49,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1431,7 +1487,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 12000,
-      "seconds": 1.51,
+      "tokens_without_burn": 12000,
+      "seconds": 1.64,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1454,7 +1511,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 12000,
-      "seconds": 0.9,
+      "tokens_without_burn": 12000,
+      "seconds": 0.96,
       "log_ok": true,
       "faults_drawn": {
         "F01": "none",
@@ -1479,7 +1537,8 @@
       "final": "DONE",
       "approvals": 1,
       "tokens": 7500,
-      "seconds": 0.99,
+      "tokens_without_burn": 7500,
+      "seconds": 1.0,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",
@@ -1500,7 +1559,8 @@
       "final": "DONE",
       "approvals": 0,
       "tokens": 6000,
-      "seconds": 0.46,
+      "tokens_without_burn": 6000,
+      "seconds": 0.5,
       "log_ok": true,
       "faults_drawn": {
         "F01": "hidden_dependency",

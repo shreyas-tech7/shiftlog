@@ -12,5 +12,7 @@ First release candidate.
 - Hash-chained JSON Lines audit log and `gatedcrew verify`.
 - `gatedcrew report`: daily report in Markdown.
 - Scripted fake worker and a 30-spec fault-injection benchmark, with and without the evaluator, seeds 1 and 2.
+- Hardening from the release check: checks run on a copy of the tree, protected files are written back after every session, rules are checked on every exit, a git allow list, a locked git environment, network subcommands blocked, checks on the shim log, usage numbers and hidden index flags, symlink-safe writes, and a timeout that cannot hang. See docs/RELEASE_CHECK.md.
+- `examples/claude-code-worker.sh`: a worker adapter for a real coding agent. Not run in this build.
 
 Release commit: recorded in docs/HUMAN_STEPS.md after the release check.

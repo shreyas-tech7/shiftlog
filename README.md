@@ -74,7 +74,7 @@ Gate triggers, summed over 30 specs. These are fixed counts for each seed, with 
 | 2 | with evaluator | 8 | 3 | 7 | 32 | 13 | 2 | 0 |
 | 2 | without evaluator | 8 | 3 | 7 | 0 | 11 | 2 | 0 |
 
-Source: `results/bench-seed1.json`, `results/bench-seed2.json`. Seed 1: 2026-11-20, none (scripted fake worker), Intel(R) Xeon(R) Processor @ 2.10GHz, 1 core, 70.8 s. Seed 2: 2026-11-20, none (scripted fake worker), Intel(R) Xeon(R) Processor @ 2.10GHz, 1 core, 106.5 s.
+Source: `results/bench-seed1.json`, `results/bench-seed2.json`. Seed 1: 2026-11-20, none (scripted fake worker), Intel(R) Xeon(R) Processor @ 2.10GHz, 1 core, 75.2 s. Seed 2: 2026-11-20, none (scripted fake worker), Intel(R) Xeon(R) Processor @ 2.10GHz, 1 core, 108.4 s.
 <!-- results:end -->
 
 What this shows. Without the evaluator, a worker that leans on a git-ignored helper file passes its own checks and gets a `passes` flag it did not earn. With the evaluator, that same fault fires a gate, the session is reverted, and the next honest attempt passes. The evaluator costs more sessions and more wall time. It buys flags that hold up.
@@ -86,10 +86,10 @@ The fake worker reports synthetic token counts. The token column leaves out the 
 <!-- cost:start -->
 | Seed | Arm | Sessions per finished feature | Reported tokens per finished feature | Wall seconds per spec | Money spent |
 | ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | with evaluator | 1.66 | 9,011,482 | 1.34 | $0 |
-| 1 | without evaluator | 1.70 | 10,002,535 | 0.76 | $0 |
-| 2 | with evaluator | 1.92 | 18,020,869 | 2.02 | $0 |
-| 2 | without evaluator | 2.11 | 23,812,649 | 1.22 | $0 |
+| 1 | with evaluator | 1.66 | 2,473 | 1.41 | $0 |
+| 1 | without evaluator | 1.70 | 2,535 | 0.83 | $0 |
+| 2 | with evaluator | 1.92 | 2,851 | 2.04 | $0 |
+| 2 | without evaluator | 2.11 | 3,125 | 1.27 | $0 |
 <!-- cost:end -->
 
 ## Run it in 10 minutes
