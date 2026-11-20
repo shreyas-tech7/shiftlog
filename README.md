@@ -128,10 +128,10 @@ To use your own worker, pass any shell command as `--worker`. It runs in the wor
 
 | Gate | Fires when | Stops this failure |
 | --- | --- | --- |
-| `forbidden_command` | the worker runs a listed command, such as `git push` or `git commit` | pushing, rewriting history, changing git config |
-| `network` | the worker runs `curl`, `wget`, `ssh` and the like while the policy allows no network | leaking code, pulling in unknown scripts |
+| `forbidden_command` | the worker runs a listed command, such as `git push` or `git commit`, or a git subcommand off the allow list | pushing, rewriting history, changing git config, hiding edits from git |
+| `network` | the worker runs `curl`, `wget`, `ssh`, `git fetch`, `pip install` and the like while the policy allows no network | leaking code, pulling in unknown scripts |
 | `forbidden_path` | the worker changes `feature_list.json`, `init.sh`, `.gitignore` or another listed path | grading its own work, hiding files from git |
-| `tamper` | gatedcrew's state, the audit log, git config, hooks or refs change during a session | editing the record, sneaking in commits |
+| `tamper` | gatedcrew's state, the audit log, the shim log, git config, hooks or refs change during a session or its checks, or the worker reports bad usage numbers | editing the record, sneaking in commits, loosening the policy |
 | `evaluator_disagrees` | checks pass in the work repo but fail in a clean clone | praising its own work, "works on my machine" |
 | `failed_twice` | sessions fail too many times in a row | burning sessions on a dead end |
 | budgets | sessions, tokens or wall time run out | runaway cost. These stop the run instead of asking |
@@ -142,7 +142,7 @@ A session that hits its timeout is killed with its whole process group and count
 
 - gatedcrew logs and gates. **It is not a sandbox.** A hostile worker can call `/usr/bin/git` by its full path, open a socket from Python, or write outside the work repo. The shims are a tripwire for an honest but careless agent. Read [docs/SAFETY.md](docs/SAFETY.md) before you trust it with anything.
 - The benchmark uses made-up fault rates on tiny Python specs. Real agents fail in other ways and at other rates.
-- The tamper gate compares hashes before and after a session. A worker that edits the state and puts it back within the session goes unseen.
+- The tamper gate compares hashes before and after a session. A worker that edits the state and puts it back within the session goes unseen. gatedcrew writes its policy, log and git config back after every session either way.
 - The hash chain shows edits. It does not stop them, and someone who can rewrite both the log and `state.json` can forge a clean chain.
 - One worker at a time. No containers. No web dashboard.
 - No real agent ran in this build. A run with a real coding agent is a human step.

@@ -16,6 +16,9 @@ evaluator_runs = 1            # set to 2 if the checks are flaky; every run must
 [commands]
 shimmed = ["git", "curl", "wget", "ssh", "scp", "nc", "ftp", "telnet", "rsync", "pip", "npm", "sudo"]
 forbidden = ["git push", "git remote", "git config", "git commit", "git reset", "git checkout", "sudo"]
+# Git subcommands the worker may run. Anything else, a one-off alias included, is
+# blocked. An empty list turns this off and leaves only the forbidden list.
+git_allowed = ["status", "diff", "log", "show", "add", "rm", "mv", "restore", "grep", "ls-files", "blame", "rev-parse", "cat-file", "apply", "init", "help", "version", "shortlog"]
 allow_network = false
 
 [paths]

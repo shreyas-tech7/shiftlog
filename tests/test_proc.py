@@ -62,3 +62,14 @@ def test_timeout_kills_the_whole_process_tree():
 def test_output_is_captured():
     res = run([sys.executable, "-c", "print('hi')"], timeout=10)
     assert res.ok and res.out.strip() == "hi"
+
+
+def test_timeout_returns_even_if_a_grandchild_keeps_the_pipe_open():
+    """Broken case: `setsid` puts a grandchild outside the killed group. It kept stdout
+    open, so the read after the kill waited for it to finish."""
+    import time
+
+    t0 = time.monotonic()
+    res = run(["/bin/sh", "-c", "setsid sleep 12 & echo started"], timeout=1)
+    assert res.timed_out
+    assert time.monotonic() - t0 < 9

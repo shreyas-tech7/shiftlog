@@ -14,7 +14,8 @@ def setup(tmp_path, policy=""):
     sd.mkdir()
     (sd / "policy.toml").write_text(policy)
     shims = install(sd, parse(policy).shimmed)
-    env = dict(os.environ, GATEDCREW_STATE=str(sd), PATH=f"{shims}{os.pathsep}{os.environ['PATH']}")
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_CONFIG_")}
+    env.update(GATEDCREW_STATE=str(sd), PATH=f"{shims}{os.pathsep}{os.environ['PATH']}")
     return sd, env
 
 
@@ -69,3 +70,11 @@ def test_shim_ignores_a_state_folder_from_the_environment(tmp_path):
     res = run(["git", "push", "origin", "main"], env=env, cwd=tmp_path, timeout=20)
     assert res.code == BLOCKED_EXIT
     assert not (soft / "shim.jsonl").exists()
+
+
+def test_alias_from_git_config_env_vars_is_blocked(tmp_path):
+    """Broken case: GIT_CONFIG_COUNT can define `alias.x=push` with no -c at all."""
+    sd, env = setup(tmp_path)
+    env.update(GIT_CONFIG_COUNT="1", GIT_CONFIG_KEY_0="alias.x", GIT_CONFIG_VALUE_0="status")
+    res = run(["git", "status"], env=env, cwd=tmp_path, timeout=20)
+    assert res.code == BLOCKED_EXIT

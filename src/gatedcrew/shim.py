@@ -59,6 +59,15 @@ def main(argv: list[str]) -> int:
     state, tool, args = Path(argv[1]), argv[2], argv[3:]
     policy = load(state / "policy.toml")
     reason = policy.forbidden_reason([tool, *args])
+    if (
+        tool == "git"
+        and not reason
+        and any(
+            k in ("GIT_CONFIG_COUNT", "GIT_CONFIG_PARAMETERS") or k.startswith("GIT_CONFIG_KEY_")
+            for k in os.environ
+        )
+    ):
+        reason = "forbidden_command"  # GIT_CONFIG_COUNT and friends can define aliases
     with (state / "shim.jsonl").open("a", encoding="utf-8") as f:
         f.write(json.dumps({"ts": time.time(), "argv": [tool, *args], "blocked": reason}) + "\n")
     if reason:

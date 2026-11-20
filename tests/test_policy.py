@@ -59,7 +59,10 @@ def test_feature_list_is_always_forbidden():
         (["git", "-c", "a=b", "--no-pager", "push"], "forbidden_command"),
         (["/usr/bin/git", "remote", "add", "o", "u"], "forbidden_command"),
         (["git", "status"], None),
-        (["git", "pushx"], None),
+        (["git", "pushx"], "forbidden_command"),  # not on the git allow list
+        (["git", "send-pack", "../bare.git"], "network"),
+        (["git", "fetch"], "network"),
+        (["pip", "-q", "install", "x"], "network"),
         (["curl", "http://x"], "network"),
         (["wget", "x"], "network"),
         (["sudo", "ls"], "forbidden_command"),
@@ -80,7 +83,9 @@ def test_allow_network_lets_curl_run():
     [
         ["git", "-c", "alias.ship=push", "ship", "origin", "main"],
         ["git", "-calias.ship=push", "ship"],
-        ["git", "-c", "core.sshCommand=sh -c id", "fetch"],
+        ["git", "-c", "core.sshCommand=sh -c id", "status"],
+        ["git", "-c", "include.path=f.cfg", "status"],
+        ["git", "update-index", "--assume-unchanged", "feature_list.json"],
         ["git", "-c", "core.hooksPath=/tmp/h", "status"],
         ["git", "--config-env=alias.x=Y", "x"],
     ],
@@ -92,3 +97,24 @@ def test_git_alias_and_config_tricks_are_blocked(argv):
 
 def test_plain_git_dash_c_still_allowed():
     assert Policy().forbidden_reason(["git", "-c", "color.ui=never", "status"]) is None
+
+
+def test_rules_longer_than_two_words_match():
+    pol = Policy(forbidden=["git remote add", "pip install"], git_allowed=[], allow_network=True)
+    assert pol.forbidden_reason(["git", "remote", "add", "o", "u"]) == "forbidden_command"
+    assert pol.forbidden_reason(["git", "remote", "-v"]) is None
+    assert pol.forbidden_reason(["pip", "-q", "install", "x"]) == "forbidden_command"
+
+
+def test_empty_git_allow_list_turns_it_off():
+    assert Policy(git_allowed=[]).forbidden_reason(["git", "stash"]) is None
+
+
+def test_builtin_defaults_match_the_shipped_policy():
+    """Broken case: a policy file without [commands] used to lose git commit, reset
+    and checkout, because the built-in defaults were weaker than the shipped file."""
+    shipped = load(ROOT / "src" / "gatedcrew" / "default_policy.toml")
+    assert parse("").forbidden == shipped.forbidden
+    assert parse("").git_allowed == shipped.git_allowed
+    assert parse("").shimmed == shipped.shimmed
+    assert parse("").forbidden_paths == shipped.forbidden_paths
