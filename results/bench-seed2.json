@@ -1,0 +1,1525 @@
+{
+  "seed": 2,
+  "date": "2026-11-20",
+  "model": "none (scripted fake worker)",
+  "machine": {
+    "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+    "python": "3.13.18",
+    "cores_used": 1
+  },
+  "total_seconds": 106.5,
+  "fault_weights_first_attempt": {
+    "none": 0.4,
+    "break": 0.15,
+    "claim_done": 0.08,
+    "hidden_dependency": 0.12,
+    "forbidden_command": 0.08,
+    "network": 0.05,
+    "forbidden_path": 0.07,
+    "timeout": 0.03,
+    "token_burn": 0.02
+  },
+  "fault_weights_later_attempts": {
+    "none": 0.7,
+    "break": 0.15,
+    "claim_done": 0.05,
+    "hidden_dependency": 0.1
+  },
+  "summary": {
+    "with_evaluator": {
+      "specs": 30,
+      "features": 114,
+      "completion_rate": 0.9737,
+      "completion_ci95": [
+        0.9453,
+        1.0
+      ],
+      "claimed_rate": 0.9737,
+      "false_passes": 0,
+      "sessions": 213,
+      "wasted_sessions": 102,
+      "wasted_per_spec": 3.4,
+      "wasted_per_spec_ci95": [
+        2.7667,
+        4.0667
+      ],
+      "gate_triggers": {
+        "budget_tokens": 2,
+        "evaluator_disagrees": 32,
+        "failed_twice": 13,
+        "forbidden_command": 8,
+        "forbidden_path": 7,
+        "network": 3
+      },
+      "gate_triggers_total": 63,
+      "budget_stops": 2,
+      "sessions_per_completed_feature": 1.919,
+      "tokens_per_completed_feature": 18020869.4,
+      "seconds_per_spec": 2.02,
+      "logs_intact": true
+    },
+    "without_evaluator": {
+      "specs": 30,
+      "features": 114,
+      "completion_rate": 0.7368,
+      "completion_ci95": [
+        0.6698,
+        0.8
+      ],
+      "claimed_rate": 0.9912,
+      "false_passes": 29,
+      "sessions": 177,
+      "wasted_sessions": 64,
+      "wasted_per_spec": 2.133,
+      "wasted_per_spec_ci95": [
+        1.6333,
+        2.6667
+      ],
+      "gate_triggers": {
+        "budget_tokens": 2,
+        "failed_twice": 11,
+        "forbidden_command": 8,
+        "forbidden_path": 7,
+        "network": 3
+      },
+      "gate_triggers_total": 29,
+      "budget_stops": 2,
+      "sessions_per_completed_feature": 2.107,
+      "tokens_per_completed_feature": 23812648.8,
+      "seconds_per_spec": 1.22,
+      "logs_intact": true
+    }
+  },
+  "runs": [
+    {
+      "spec": 1,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 1.05,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "none",
+        "F03": "claim_done"
+      }
+    },
+    {
+      "spec": 1,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 0.78,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "none",
+        "F03": "claim_done"
+      }
+    },
+    {
+      "spec": 2,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 3,
+      "gates": {
+        "network": 1,
+        "evaluator_disagrees": 1,
+        "budget_tokens": 1
+      },
+      "final": "STOPPED",
+      "approvals": 2,
+      "tokens": 1000009000,
+      "seconds": 1.45,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "network",
+        "F03": "hidden_dependency",
+        "F04": "token_burn",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 2,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 6,
+      "wasted_sessions": 2,
+      "gates": {
+        "network": 1,
+        "budget_tokens": 1
+      },
+      "final": "STOPPED",
+      "approvals": 1,
+      "tokens": 1000007500,
+      "seconds": 0.69,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "network",
+        "F03": "hidden_dependency",
+        "F04": "token_burn",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 3,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 2,
+      "gates": {
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 1.2,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "none",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 3,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 2,
+      "gates": {
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 0.65,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "none",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 4,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 9,
+      "wasted_sessions": 5,
+      "gates": {
+        "evaluator_disagrees": 2,
+        "failed_twice": 1,
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 4,
+      "tokens": 13500,
+      "seconds": 1.91,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "hidden_dependency",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 4,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 2,
+      "claimed_pass": 4,
+      "false_pass": 2,
+      "sessions": 5,
+      "wasted_sessions": 1,
+      "gates": {
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 7500,
+      "seconds": 0.65,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "hidden_dependency",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 5,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 3,
+      "gates": {
+        "network": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 10500,
+      "seconds": 1.58,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "network",
+        "F03": "break",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 5,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 3,
+      "gates": {
+        "network": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 10500,
+      "seconds": 0.88,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "network",
+        "F03": "break",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 6,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "failed_twice": 1,
+        "forbidden_path": 1,
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 12000,
+      "seconds": 1.76,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "claim_done",
+        "F03": "forbidden_path",
+        "F04": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 6,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 7,
+      "wasted_sessions": 3,
+      "gates": {
+        "failed_twice": 1,
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 10500,
+      "seconds": 0.96,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "claim_done",
+        "F03": "forbidden_path",
+        "F04": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 7,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "evaluator_disagrees": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 9000,
+      "seconds": 1.65,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "none"
+      }
+    },
+    {
+      "spec": 7,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 2,
+      "claimed_pass": 3,
+      "false_pass": 1,
+      "sessions": 3,
+      "wasted_sessions": 0,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 4500,
+      "seconds": 0.37,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "none"
+      }
+    },
+    {
+      "spec": 8,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 5,
+      "claimed_pass": 5,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 2,
+      "gates": {
+        "evaluator_disagrees": 1,
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 10500,
+      "seconds": 1.73,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "hidden_dependency",
+        "F03": "none",
+        "F04": "none",
+        "F05": "forbidden_path"
+      }
+    },
+    {
+      "spec": 8,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 4,
+      "claimed_pass": 5,
+      "false_pass": 1,
+      "sessions": 6,
+      "wasted_sessions": 1,
+      "gates": {
+        "forbidden_path": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 0.72,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "hidden_dependency",
+        "F03": "none",
+        "F04": "none",
+        "F05": "forbidden_path"
+      }
+    },
+    {
+      "spec": 9,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "network": 1,
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 9000,
+      "seconds": 1.18,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "network",
+        "F02": "claim_done",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 9,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 2,
+      "claimed_pass": 3,
+      "false_pass": 1,
+      "sessions": 5,
+      "wasted_sessions": 2,
+      "gates": {
+        "network": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 7500,
+      "seconds": 0.58,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "network",
+        "F02": "claim_done",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 10,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 5,
+      "claimed_pass": 5,
+      "false_pass": 0,
+      "sessions": 10,
+      "wasted_sessions": 5,
+      "gates": {
+        "evaluator_disagrees": 3,
+        "budget_tokens": 1
+      },
+      "final": "STOPPED",
+      "approvals": 3,
+      "tokens": 1000013500,
+      "seconds": 2.25,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "break",
+        "F04": "none",
+        "F05": "token_burn"
+      }
+    },
+    {
+      "spec": 10,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 3,
+      "claimed_pass": 5,
+      "false_pass": 2,
+      "sessions": 7,
+      "wasted_sessions": 2,
+      "gates": {
+        "budget_tokens": 1
+      },
+      "final": "STOPPED",
+      "approvals": 0,
+      "tokens": 1000009000,
+      "seconds": 0.83,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "break",
+        "F04": "none",
+        "F05": "token_burn"
+      }
+    },
+    {
+      "spec": 11,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 9,
+      "wasted_sessions": 5,
+      "gates": {
+        "forbidden_command": 2,
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 13500,
+      "seconds": 1.92,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "forbidden_command",
+        "F02": "none",
+        "F03": "claim_done",
+        "F04": "forbidden_command"
+      }
+    },
+    {
+      "spec": 11,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "forbidden_command": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 12000,
+      "seconds": 1.01,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "forbidden_command",
+        "F02": "none",
+        "F03": "claim_done",
+        "F04": "forbidden_command"
+      }
+    },
+    {
+      "spec": 12,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 10,
+      "wasted_sessions": 6,
+      "gates": {
+        "evaluator_disagrees": 1,
+        "failed_twice": 2
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 15000,
+      "seconds": 5.69,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "timeout",
+        "F02": "hidden_dependency",
+        "F03": "none",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 12,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 9,
+      "wasted_sessions": 5,
+      "gates": {
+        "failed_twice": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 13500,
+      "seconds": 5.01,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "timeout",
+        "F02": "hidden_dependency",
+        "F03": "none",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 13,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 10,
+      "wasted_sessions": 6,
+      "gates": {
+        "forbidden_path": 1,
+        "evaluator_disagrees": 1,
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 15000,
+      "seconds": 5.7,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "forbidden_path",
+        "F02": "hidden_dependency",
+        "F03": "timeout",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 13,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "forbidden_path": 1,
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 12000,
+      "seconds": 4.88,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "forbidden_path",
+        "F02": "hidden_dependency",
+        "F03": "timeout",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 14,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 5,
+      "claimed_pass": 5,
+      "false_pass": 0,
+      "sessions": 8,
+      "wasted_sessions": 3,
+      "gates": {
+        "forbidden_command": 1,
+        "evaluator_disagrees": 2
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 12000,
+      "seconds": 1.91,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "forbidden_command",
+        "F03": "hidden_dependency",
+        "F04": "hidden_dependency",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 14,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 3,
+      "claimed_pass": 5,
+      "false_pass": 2,
+      "sessions": 6,
+      "wasted_sessions": 1,
+      "gates": {
+        "forbidden_command": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 0.72,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "forbidden_command",
+        "F03": "hidden_dependency",
+        "F04": "hidden_dependency",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 15,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 1.04,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "claim_done"
+      }
+    },
+    {
+      "spec": 15,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 9000,
+      "seconds": 0.73,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "claim_done"
+      }
+    },
+    {
+      "spec": 16,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 11,
+      "wasted_sessions": 7,
+      "gates": {
+        "failed_twice": 2,
+        "evaluator_disagrees": 2
+      },
+      "final": "DONE",
+      "approvals": 4,
+      "tokens": 16500,
+      "seconds": 2.26,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "break",
+        "F03": "hidden_dependency",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 16,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 2,
+      "claimed_pass": 4,
+      "false_pass": 2,
+      "sessions": 9,
+      "wasted_sessions": 5,
+      "gates": {
+        "failed_twice": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 13500,
+      "seconds": 1.06,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "break",
+        "F03": "hidden_dependency",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 17,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "evaluator_disagrees": 1,
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 12000,
+      "seconds": 1.72,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "hidden_dependency",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 17,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 4,
+      "false_pass": 1,
+      "sessions": 5,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 7500,
+      "seconds": 0.58,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "hidden_dependency",
+        "F04": "none"
+      }
+    },
+    {
+      "spec": 18,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 10,
+      "wasted_sessions": 7,
+      "gates": {
+        "evaluator_disagrees": 3,
+        "forbidden_command": 1,
+        "failed_twice": 1
+      },
+      "final": "STOPPED",
+      "approvals": 4,
+      "tokens": 15000,
+      "seconds": 2.0,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "hidden_dependency",
+        "F03": "forbidden_command",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 18,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 2,
+      "claimed_pass": 4,
+      "false_pass": 2,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "forbidden_command": 1,
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 12000,
+      "seconds": 0.97,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "hidden_dependency",
+        "F03": "forbidden_command",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 19,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 3,
+      "wasted_sessions": 0,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 4500,
+      "seconds": 0.72,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "none"
+      }
+    },
+    {
+      "spec": 19,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 3,
+      "wasted_sessions": 0,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 4500,
+      "seconds": 0.34,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "none"
+      }
+    },
+    {
+      "spec": 20,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 5,
+      "wasted_sessions": 2,
+      "gates": {
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 7500,
+      "seconds": 1.17,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "break"
+      }
+    },
+    {
+      "spec": 20,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 2,
+      "claimed_pass": 3,
+      "false_pass": 1,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 6000,
+      "seconds": 0.49,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "none",
+        "F03": "break"
+      }
+    },
+    {
+      "spec": 21,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 5,
+      "claimed_pass": 5,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 2,
+      "gates": {
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 10500,
+      "seconds": 1.7,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "none",
+        "F04": "hidden_dependency",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 21,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 4,
+      "claimed_pass": 5,
+      "false_pass": 1,
+      "sessions": 6,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 9000,
+      "seconds": 0.68,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "break",
+        "F03": "none",
+        "F04": "hidden_dependency",
+        "F05": "none"
+      }
+    },
+    {
+      "spec": 22,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 6000,
+      "seconds": 4.74,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "timeout"
+      }
+    },
+    {
+      "spec": 22,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 6000,
+      "seconds": 4.35,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "timeout"
+      }
+    },
+    {
+      "spec": 23,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 2,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 9000,
+      "seconds": 1.32,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "none",
+        "F03": "none",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 23,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 4,
+      "claimed_pass": 4,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 2,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 9000,
+      "seconds": 0.64,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "none",
+        "F03": "none",
+        "F04": "break"
+      }
+    },
+    {
+      "spec": 24,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 6000,
+      "seconds": 0.93,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 24,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 2,
+      "claimed_pass": 3,
+      "false_pass": 1,
+      "sessions": 3,
+      "wasted_sessions": 0,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 4500,
+      "seconds": 0.31,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 25,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 4,
+      "gates": {
+        "failed_twice": 1,
+        "forbidden_command": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 10500,
+      "seconds": 1.22,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "forbidden_command",
+        "F03": "break"
+      }
+    },
+    {
+      "spec": 25,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 7,
+      "wasted_sessions": 4,
+      "gates": {
+        "failed_twice": 1,
+        "forbidden_command": 1
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 10500,
+      "seconds": 0.87,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "claim_done",
+        "F02": "forbidden_command",
+        "F03": "break"
+      }
+    },
+    {
+      "spec": 26,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {
+        "evaluator_disagrees": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 6000,
+      "seconds": 1.0,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 26,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 2,
+      "claimed_pass": 3,
+      "false_pass": 1,
+      "sessions": 3,
+      "wasted_sessions": 0,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 4500,
+      "seconds": 0.33,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 27,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {
+        "forbidden_command": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 6000,
+      "seconds": 0.84,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "forbidden_command"
+      }
+    },
+    {
+      "spec": 27,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {
+        "forbidden_command": 1
+      },
+      "final": "DONE",
+      "approvals": 1,
+      "tokens": 6000,
+      "seconds": 0.41,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "none",
+        "F02": "none",
+        "F03": "forbidden_command"
+      }
+    },
+    {
+      "spec": 28,
+      "evaluator": true,
+      "features": 4,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 9,
+      "wasted_sessions": 6,
+      "gates": {
+        "evaluator_disagrees": 2,
+        "forbidden_path": 2,
+        "failed_twice": 1
+      },
+      "final": "STOPPED",
+      "approvals": 4,
+      "tokens": 13500,
+      "seconds": 1.74,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "forbidden_path",
+        "F03": "none",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 28,
+      "evaluator": false,
+      "features": 4,
+      "true_pass": 2,
+      "claimed_pass": 4,
+      "false_pass": 2,
+      "sessions": 8,
+      "wasted_sessions": 4,
+      "gates": {
+        "forbidden_path": 2,
+        "failed_twice": 1
+      },
+      "final": "DONE",
+      "approvals": 3,
+      "tokens": 12000,
+      "seconds": 0.83,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "forbidden_path",
+        "F03": "none",
+        "F04": "forbidden_path"
+      }
+    },
+    {
+      "spec": 29,
+      "evaluator": true,
+      "features": 5,
+      "true_pass": 5,
+      "claimed_pass": 5,
+      "false_pass": 0,
+      "sessions": 10,
+      "wasted_sessions": 5,
+      "gates": {
+        "forbidden_command": 2,
+        "evaluator_disagrees": 2
+      },
+      "final": "DONE",
+      "approvals": 4,
+      "tokens": 15000,
+      "seconds": 2.05,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "none",
+        "F03": "forbidden_command",
+        "F04": "none",
+        "F05": "forbidden_command"
+      }
+    },
+    {
+      "spec": 29,
+      "evaluator": false,
+      "features": 5,
+      "true_pass": 3,
+      "claimed_pass": 5,
+      "false_pass": 2,
+      "sessions": 8,
+      "wasted_sessions": 3,
+      "gates": {
+        "forbidden_command": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 12000,
+      "seconds": 0.99,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "break",
+        "F02": "none",
+        "F03": "forbidden_command",
+        "F04": "none",
+        "F05": "forbidden_command"
+      }
+    },
+    {
+      "spec": 30,
+      "evaluator": true,
+      "features": 3,
+      "true_pass": 3,
+      "claimed_pass": 3,
+      "false_pass": 0,
+      "sessions": 6,
+      "wasted_sessions": 3,
+      "gates": {
+        "evaluator_disagrees": 2
+      },
+      "final": "DONE",
+      "approvals": 2,
+      "tokens": 9000,
+      "seconds": 5.22,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "timeout",
+        "F03": "hidden_dependency"
+      }
+    },
+    {
+      "spec": 30,
+      "evaluator": false,
+      "features": 3,
+      "true_pass": 1,
+      "claimed_pass": 3,
+      "false_pass": 2,
+      "sessions": 4,
+      "wasted_sessions": 1,
+      "gates": {},
+      "final": "DONE",
+      "approvals": 0,
+      "tokens": 6000,
+      "seconds": 4.36,
+      "log_ok": true,
+      "faults_drawn": {
+        "F01": "hidden_dependency",
+        "F02": "timeout",
+        "F03": "hidden_dependency"
+      }
+    }
+  ]
+}

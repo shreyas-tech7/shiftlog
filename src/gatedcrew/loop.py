@@ -107,6 +107,7 @@ class Run:
         )
         rec["worker_seconds"] = round(self.clock() - t0, 3)
         rec["worker_exit"] = res.code
+        rec["worker_tail"] = (res.out + res.err)[-300:]
         usage = {}
         if usage_file.exists():
             try:
