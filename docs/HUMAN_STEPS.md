@@ -2,7 +2,7 @@
 
 These are the steps only Shreyas can do, in order. The build ran with no GitHub CLI, no tag pushes and no way to create `main`.
 
-Release commit: `RELEASE_SHA`
+Release commit: `89f3c0e6a32fe7c68f371b1208148e69ece01f7f`
 
 Branch: `claude/build-shiftlog`
 
@@ -12,7 +12,7 @@ Branch: `claude/build-shiftlog`
 
    ```
    git fetch origin
-   git tag -a v0.1.0-rc1 RELEASE_SHA -m "Release candidate 1"
+   git tag -a v0.1.0-rc1 89f3c0e6a32fe7c68f371b1208148e69ece01f7f -m "Release candidate 1"
    git push origin v0.1.0-rc1
    ```
 
