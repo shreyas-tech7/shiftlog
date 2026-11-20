@@ -56,3 +56,16 @@ def test_full_path_walks_past_the_shim(tmp_path):
 def test_shim_uses_this_python(tmp_path):
     sd, _ = setup(tmp_path)
     assert sys.executable in (sd / "gatedcrew-shims" / "git").read_text()
+
+
+def test_shim_ignores_a_state_folder_from_the_environment(tmp_path):
+    """Broken case: if the shim read GATEDCREW_STATE, a worker could point it at a
+    folder with an empty policy and push."""
+    sd, env = setup(tmp_path)
+    soft = tmp_path / "soft"
+    soft.mkdir()
+    (soft / "policy.toml").write_text('[commands]\nforbidden = ["sudo"]\n')
+    env["GATEDCREW_STATE"] = str(soft)
+    res = run(["git", "push", "origin", "main"], env=env, cwd=tmp_path, timeout=20)
+    assert res.code == BLOCKED_EXIT
+    assert not (soft / "shim.jsonl").exists()

@@ -8,18 +8,27 @@ catches, what it misses, and how to run it with that in mind.
 - **Commands on the shim list.** The worker's PATH starts with a folder of small
   scripts named `git`, `curl`, `wget`, `ssh`, `scp`, `nc`, `pip`, `npm`, `sudo` and a few
   more. Each call is logged in `.git/gatedcrew/shim.jsonl`. Calls that the policy
-  forbids exit with code 126 and fire a gate.
+  forbids exit with code 126 and fire a gate. Each shim script has the state
+  folder written into it, so changing an environment variable cannot point it at a
+  softer policy.
+- **Git tricks that hide a command.** A one-off alias (`git -c alias.ship=push ship`)
+  and a `-c` that swaps in another program or folder (`core.sshCommand`,
+  `core.hooksPath`, `core.fsmonitor`, `core.pager`, or any `--config-env`) are
+  blocked like a forbidden command.
 - **Changes to forbidden paths.** After each session gatedcrew lists every changed,
-  untracked and ignored file and matches it against `[paths] forbidden`. The
-  feature list is always forbidden.
+  untracked and ignored file and matches it against `[paths] forbidden`. A rename
+  counts both the old and the new path. The feature list is always forbidden.
 - **Tampering during a session.** gatedcrew hashes its own state files, the audit
-  log, `.git/config`, the hooks folder and every ref before and after the worker.
+  log, `.git/config`, the hooks folder, `.git/info` and every ref before and after
+  the worker. A shim log that got shorter during the session also counts as
+  tampering.
 - **Self-grading.** The checks come from the last good commit. The evaluator
   reruns them in a fresh clone in a separate process.
 - **Runaway sessions.** Every subprocess has a timeout. A timeout kills the whole
   process group.
-- **Leftovers.** A failed session ends with `git reset --hard` and `git clean -fdx`
-  inside the work repo, so the tree matches the last good commit.
+- **Leftovers.** A failed session ends with `git reset --hard` and `git clean -ffdx`
+  inside the work repo, so the tree matches the last good commit. The second `-f`
+  also removes nested git repos.
 
 ## What it misses
 

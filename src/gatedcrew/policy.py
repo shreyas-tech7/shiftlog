@@ -49,6 +49,8 @@ class Policy:
         tool = Path(argv[0]).name
         if tool in NETWORK_TOOLS and not self.allow_network:
             return "network"
+        if tool == "git" and _git_alias_or_env_trick(argv[1:]):
+            return "forbidden_command"
         words = [tool, *_subcommand(tool, argv[1:])]
         for rule in self.forbidden:
             parts = rule.split()
@@ -83,6 +85,23 @@ SCHEMA: dict[str, dict[str, tuple[str, type]]] = {
         "check_timeout_seconds": ("check_timeout_seconds", float),
     },
 }
+
+
+def _git_alias_or_env_trick(args: list[str]) -> bool:
+    """`git -c alias.x=push x` or `git -c core.sshCommand=...` hides the real action.
+    Block any one-off alias, and any -c that points git at another program or folder."""
+    risky = ("alias.", "core.sshcommand", "core.hookspath", "core.fsmonitor", "core.pager")
+    for i, a in enumerate(args):
+        val = None
+        if a == "-c" and i + 1 < len(args):
+            val = args[i + 1]
+        elif a.startswith("-c") and len(a) > 2:
+            val = a[2:]
+        elif a.startswith("--config-env"):
+            return True
+        if val is not None and val.lower().startswith(risky):
+            return True
+    return False
 
 
 def _subcommand(tool: str, args: list[str]) -> list[str]:

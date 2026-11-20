@@ -64,7 +64,12 @@ class Run:
             p = self.sd / name
             h.update(name.encode() + (p.read_bytes() if p.exists() else b"-"))
         git_dir = self.work / ".git"
-        for p in sorted([git_dir / "config", *sorted((git_dir / "hooks").glob("*"))]):
+        watched = [
+            git_dir / "config",
+            *(git_dir / "hooks").glob("*"),
+            *(git_dir / "info").glob("*"),
+        ]
+        for p in sorted(watched):
             if p.is_file():
                 h.update(str(p).encode() + p.read_bytes())
         refs = gitops.git(["for-each-ref", "--format=%(refname) %(objectname)"], self.work).out
@@ -120,6 +125,7 @@ class Run:
         st["cost_usd"] = round(st["cost_usd"] + rec["cost_usd"], 6)
 
         calls = []
+        shim_cut = shim_log.exists() and shim_log.stat().st_size < shim_start
         if shim_log.exists():
             with shim_log.open("rb") as f:
                 f.seek(shim_start)
@@ -132,7 +138,7 @@ class Run:
             for f in rec["changed_files"]
             if any(fnmatch.fnmatch(f, pat) for pat in pol.forbidden_paths)
         ]
-        tampered = self.guard_snapshot() != before
+        tampered = self.guard_snapshot() != before or shim_cut
 
         if res.timed_out:
             rec["outcome"] = "timeout"

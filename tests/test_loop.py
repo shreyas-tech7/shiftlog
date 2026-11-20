@@ -258,3 +258,52 @@ def test_revert_restores_a_changed_tracked_file(tmp_path):
     assert gitops.head(work) == good
     assert (work / "calc.py").read_text() == ADD
     assert gitops.changed_files(work) == ["PENDING_APPROVAL.md"]
+
+
+FIX_CALC = "printf 'def add(a, b):\\n    return a + b\\n' > calc.py"
+RENAME_WORKER = f"git mv feature_list.json moved.json && {FIX_CALC}"
+
+
+def test_renaming_a_forbidden_path_fires_the_gate(tmp_path):
+    """Broken case: `git status -z` lists a rename as two entries, and the old path has
+    no status prefix. Parsing both alike drops the first three letters of the old
+    path, so moving feature_list.json slipped past the forbidden path check."""
+    work, _ = make(tmp_path, GOOD)
+    assert loop.Run(work, RENAME_WORKER).go() == "PENDING_APPROVAL"
+    s = sessions(work)[0]
+    assert s["rule"] == "forbidden_path"
+    assert "feature_list.json" in s["forbidden_paths_touched"]
+    assert (work / "feature_list.json").exists() and not (work / "moved.json").exists()
+
+
+NESTED_WORKER = "git init -q vendor && echo x > vendor/x.txt"
+
+
+def test_revert_removes_a_nested_repo(tmp_path):
+    """Broken case: `git clean -fdx` with one -f skips folders that hold their own
+    .git, so a nested repo survived the revert."""
+    work, _ = make(tmp_path, GOOD, fails=1)
+    loop.Run(work, NESTED_WORKER).go()
+    assert not (work / "vendor").exists()
+
+
+INFO_WORKER = f"echo secret_helper.py >> .git/info/exclude && {FIX_CALC}"
+
+
+def test_editing_git_info_exclude_fires_tamper(tmp_path):
+    """Broken case: .git/info/exclude hides files from git just like .gitignore."""
+    work, _ = make(tmp_path, GOOD)
+    assert loop.Run(work, INFO_WORKER).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+
+
+SHIM_CUT_WORKER = f'git push origin main; : > "$GATEDCREW_STATE/shim.jsonl"; {FIX_CALC}'
+
+
+def test_wiping_the_shim_log_fires_tamper(tmp_path):
+    """Broken case: a worker that runs a blocked command and then empties shim.jsonl
+    would hide the blocked call."""
+    work, _ = make(tmp_path, GOOD)
+    (state_dir(work) / "shim.jsonl").write_text('{"argv": ["git", "status"]}\n')
+    assert loop.Run(work, SHIM_CUT_WORKER).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"

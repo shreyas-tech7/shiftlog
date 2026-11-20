@@ -32,7 +32,8 @@ def install(state_dir: Path, tools: list[str]) -> Path:
             continue
         path = shim_dir / tool
         path.write_text(
-            f'#!/bin/sh\nexec "{sys.executable}" -I -m gatedcrew.shim "{tool}" "$@"\n',
+            f'#!/bin/sh\nexec "{sys.executable}" -I -m gatedcrew.shim --state "{state_dir.resolve()}" '
+            f'"{tool}" "$@"\n',
             encoding="utf-8",
         )
         path.chmod(0o755)
@@ -50,8 +51,12 @@ def real_binary(tool: str, path_var: str) -> str | None:
 
 
 def main(argv: list[str]) -> int:
-    tool, args = argv[0], argv[1:]
-    state = Path(os.environ["GATEDCREW_STATE"])
+    # The state folder is written into each shim script, so a worker cannot point the
+    # shim at a softer policy by changing an environment variable.
+    if argv[0] != "--state":
+        print("gatedcrew shim: missing --state", file=sys.stderr)
+        return 2
+    state, tool, args = Path(argv[1]), argv[2], argv[3:]
     policy = load(state / "policy.toml")
     reason = policy.forbidden_reason([tool, *args])
     with (state / "shim.jsonl").open("a", encoding="utf-8") as f:

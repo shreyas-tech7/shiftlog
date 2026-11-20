@@ -73,3 +73,22 @@ def test_forbidden_reason(argv, reason):
 
 def test_allow_network_lets_curl_run():
     assert parse("[commands]\nallow_network = true\n").forbidden_reason(["curl", "x"]) is None
+
+
+@pytest.mark.parametrize(
+    "argv",
+    [
+        ["git", "-c", "alias.ship=push", "ship", "origin", "main"],
+        ["git", "-calias.ship=push", "ship"],
+        ["git", "-c", "core.sshCommand=sh -c id", "fetch"],
+        ["git", "-c", "core.hooksPath=/tmp/h", "status"],
+        ["git", "--config-env=alias.x=Y", "x"],
+    ],
+)
+def test_git_alias_and_config_tricks_are_blocked(argv):
+    """Broken case: a one-off alias hides `git push` behind a harmless name."""
+    assert Policy().forbidden_reason(argv) == "forbidden_command"
+
+
+def test_plain_git_dash_c_still_allowed():
+    assert Policy().forbidden_reason(["git", "-c", "color.ui=never", "status"]) is None

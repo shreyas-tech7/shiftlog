@@ -22,7 +22,7 @@ A test reads every Python file and fails if any other file starts a program.
 This file runs git for gatedcrew.
 It always passes the same settings: name, email, no signing, no hooks.
 So your own git settings cannot change what happens.
-`reset_to` throws away a failed session. It runs `git reset --hard` and `git clean -fdx`.
+`reset_to` throws away a failed session. It runs `git reset --hard` and `git clean -ffdx`.
 `tree_matches_head` checks that nothing is left over.
 
 ### `spec.py`

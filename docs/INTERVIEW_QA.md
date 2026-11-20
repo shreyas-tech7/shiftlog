@@ -42,7 +42,7 @@ raises. `tests/test_machine.py` tests every row, and a test asserts that a faile
 can never reach COMMIT.
 
 **7. How does the revert work, and how do you know it is complete?**
-`gitops.reset_to` runs `git reset --hard <good>` and `git clean -fdx`. The `-x` removes
+`gitops.reset_to` runs `git reset --hard <good>` and `git clean -ffdx`. The `-x` removes
 ignored files too, so a hidden helper cannot survive. `tree_matches_head` then checks
 `git status --ignored`. Two tests prove it: one with a changed tracked file and one with
 untracked and ignored files. A mutation check (turning off the reset) makes the first fail.

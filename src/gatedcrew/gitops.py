@@ -58,10 +58,14 @@ def changed_files(cwd: str | Path) -> list[str]:
     """Tracked changes plus untracked and ignored files, relative to HEAD."""
     out = git(["status", "--porcelain", "--untracked-files=all", "--ignored", "-z"], cwd).out
     files = []
-    for entry in out.split("\0"):
-        if len(entry) > 3:
-            files.append(entry[3:])
-    return sorted(set(files))
+    entries = iter(out.split("\0"))
+    for entry in entries:
+        if len(entry) < 4:
+            continue
+        files.append(entry[3:])
+        if entry[0] in "RC":  # a rename or copy: the next entry is the old path
+            files.append(next(entries, ""))
+    return sorted({f for f in files if f})
 
 
 def commit_all(cwd: str | Path, message: str) -> str:
@@ -74,7 +78,7 @@ def reset_to(cwd: str | Path, sha: str) -> None:
     """Put the working tree back to `sha` and remove every untracked or ignored file
     inside this repo. The `.git` folder (where gatedcrew keeps its state) is untouched."""
     git(["reset", "-q", "--hard", sha], cwd)
-    git(["clean", "-q", "-f", "-d", "-x"], cwd)
+    git(["clean", "-q", "-f", "-f", "-d", "-x"], cwd)  # -f twice: nested repos too
 
 
 def tree_matches_head(cwd: str | Path) -> bool:
