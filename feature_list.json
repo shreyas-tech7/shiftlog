@@ -6,7 +6,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_init.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F02",
@@ -15,7 +15,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_proc.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F03",
@@ -24,7 +24,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_init.py::test_pinned_git_ignores_machine_config"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F04",
@@ -33,7 +33,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_policy.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F05",
@@ -42,7 +42,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'happy or claim_done or second_feature'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F06",
@@ -51,7 +51,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_machine.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F07",
@@ -60,7 +60,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'revert'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F08",
@@ -70,7 +70,7 @@
       ".venv/bin/python -m pytest -q tests/test_shim.py",
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'forbidden_command or network'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F09",
@@ -79,7 +79,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'forbidden_path or audit_log'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F10",
@@ -88,7 +88,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'evaluator'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F11",
@@ -97,7 +97,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'budget or timeout or backoff'"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F12",
@@ -107,7 +107,7 @@
       ".venv/bin/python -m pytest -q tests/test_loop.py -k 'twice or approve or pending'",
       ".venv/bin/python -m pytest -q tests/test_cli.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F13",
@@ -116,7 +116,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_audit.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F14",
@@ -125,7 +125,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_report.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F15",
@@ -134,7 +134,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_proc.py tests/test_network_guard.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F16",
@@ -144,7 +144,7 @@
       ".venv/bin/python -m pytest -q tests/test_bench.py",
       "test -f results/bench-seed1.json && test -f results/bench-seed2.json"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F17",
@@ -154,7 +154,7 @@
       ".venv/bin/gatedcrew readme --check",
       ".venv/bin/python -m pytest -q tests/test_readme.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F18",
@@ -164,7 +164,7 @@
       ".venv/bin/python scripts/check_links.py",
       ".venv/bin/python -m pytest -q tests/test_repo.py"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F19",
@@ -173,7 +173,7 @@
     "steps": [
       ".venv/bin/python -m pytest -q tests/test_repo.py -k study"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F20",
@@ -182,7 +182,7 @@
     "steps": [
       "test -f docs/RELEASE_CHECK.md"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F21",
@@ -192,7 +192,7 @@
       "grep -q 'v0.1.0-rc1' CHANGELOG.md",
       "test -f docs/handoff/COWORK_PROMPT.md"
     ],
-    "passes": false
+    "passes": true
   },
   {
     "id": "F22",
@@ -201,6 +201,6 @@
     "steps": [
       "./init.sh"
     ],
-    "passes": false
+    "passes": true
   }
 ]

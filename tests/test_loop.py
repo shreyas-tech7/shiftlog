@@ -224,8 +224,11 @@ def test_worker_that_edits_the_audit_log_fires_a_gate(tmp_path):
     assert loop.Run(work, f"{sys.executable} {tmp_path / 'tamper.py'}").go() == "PENDING_APPROVAL"
     s = sessions(work)[-1]
     assert s["rule"] == "tamper"
+    # The edited log was put back from the copy saved before the session.
+    assert ".git/gatedcrew/audit.jsonl" in s["restored"]
     ok, msg = audit.verify(state_dir(work) / "audit.jsonl", state(work)["audit_head"])
-    assert not ok and "line 1" in msg
+    assert ok, msg
+    assert audit.read(state_dir(work) / "audit.jsonl")[0].get("features") != 99
 
 
 def test_crash_mid_session_is_thrown_away(tmp_path):
@@ -258,3 +261,157 @@ def test_revert_restores_a_changed_tracked_file(tmp_path):
     assert gitops.head(work) == good
     assert (work / "calc.py").read_text() == ADD
     assert gitops.changed_files(work) == ["PENDING_APPROVAL.md"]
+
+
+FIX_CALC = "printf 'def add(a, b):\\n    return a + b\\n' > calc.py"
+RENAME_WORKER = f"git mv feature_list.json moved.json && {FIX_CALC}"
+
+
+def test_renaming_a_forbidden_path_fires_the_gate(tmp_path):
+    """Broken case: `git status -z` lists a rename as two entries, and the old path has
+    no status prefix. Parsing both alike drops the first three letters of the old
+    path, so moving feature_list.json slipped past the forbidden path check."""
+    work, _ = make(tmp_path, GOOD)
+    assert loop.Run(work, RENAME_WORKER).go() == "PENDING_APPROVAL"
+    s = sessions(work)[0]
+    assert s["rule"] == "forbidden_path"
+    assert "feature_list.json" in s["forbidden_paths_touched"]
+    assert (work / "feature_list.json").exists() and not (work / "moved.json").exists()
+
+
+NESTED_WORKER = "git init -q vendor && echo x > vendor/x.txt"
+
+
+def test_revert_removes_a_nested_repo(tmp_path):
+    """Broken case: `git clean -fdx` with one -f skips folders that hold their own
+    .git, so a nested repo survived the revert."""
+    work, _ = make(tmp_path, GOOD, fails=1)
+    loop.Run(work, NESTED_WORKER).go()
+    assert not (work / "vendor").exists()
+
+
+INFO_WORKER = f"echo secret_helper.py >> .git/info/exclude && {FIX_CALC}"
+
+
+def test_editing_git_info_exclude_fires_tamper(tmp_path):
+    """Broken case: .git/info/exclude hides files from git just like .gitignore."""
+    work, _ = make(tmp_path, GOOD)
+    assert loop.Run(work, INFO_WORKER).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+
+
+SHIM_CUT_WORKER = f'git push origin main; : > "$GATEDCREW_STATE/shim.jsonl"; {FIX_CALC}'
+
+
+def test_wiping_the_shim_log_fires_tamper(tmp_path):
+    """Broken case: a worker that runs a blocked command and then empties shim.jsonl
+    would hide the blocked call."""
+    work, _ = make(tmp_path, GOOD)
+    (state_dir(work) / "shim.jsonl").write_text('{"argv": ["git", "status"]}\n')
+    assert loop.Run(work, SHIM_CUT_WORKER).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+
+
+def test_worker_code_run_by_the_checks_cannot_grade_itself(tmp_path):
+    """Broken case: the checks import the worker's calc.py. Run in the work repo after
+    the gates, that code could flip every passes flag and loosen policy.toml."""
+    work, _ = make(tmp_path, GOOD)
+    pol = state_dir(work) / "policy.toml"
+    original = pol.read_text()
+    evil = (
+        "import json, pathlib\n"
+        "p = pathlib.Path('feature_list.json')\n"
+        "if p.exists():\n"
+        "    p.write_text(json.dumps([dict(f, passes=True) for f in json.loads(p.read_text())]))\n"
+        f"pathlib.Path({str(pol)!r}).write_text('')\n"
+        "def add(a, b):\n    return a + b\n"
+    )
+    (tmp_path / "evil.py").write_text(evil)
+    worker = f"cp {tmp_path / 'evil.py'} calc.py"
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    s = sessions(work)[0]
+    assert s["rule"] == "tamper"
+    assert flags(work) == {"F01": False, "F02": False}
+    assert pol.read_text() == original
+
+
+def test_timeout_does_not_hide_a_policy_edit(tmp_path):
+    """Broken case: a session that timed out skipped every rule check, and the edited
+    policy stayed on disk for the next session."""
+    work, _ = make(tmp_path, GOOD, timeout=1)
+    pol = state_dir(work) / "policy.toml"
+    original = pol.read_text()
+    worker = f"printf '[commands]\\nforbidden = []\\n' >> {pol} && sleep 5"
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    s = sessions(work)[0]
+    assert s["rule"] == "tamper"
+    assert pol.read_text() == original
+
+
+def test_a_bad_line_in_the_shim_log_is_tamper_not_a_crash(tmp_path):
+    work, _ = make(tmp_path, GOOD)
+    worker = f'echo "not json" >> "$GATEDCREW_STATE/shim.jsonl"; {FIX_CALC}'
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+
+
+@pytest.mark.parametrize("usage", ['{"tokens": -999999999}', '{"tokens": "lots"}', "[1]"])
+def test_bad_usage_numbers_fire_tamper(tmp_path, usage):
+    """Broken case: a negative token count lowered the running total below the budget."""
+    work, _ = make(tmp_path, GOOD)
+    worker = f"echo '{usage}' > \"$GATEDCREW_USAGE\"; {FIX_CALC}"
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+    assert state(work)["tokens"] == 0
+
+
+def test_symlinked_progress_file_does_not_redirect_writes(tmp_path):
+    """Broken case: with PROGRESS.md pointing at init.sh, gatedcrew wrote progress text
+    into init.sh and committed it."""
+    work, _ = make(tmp_path, GOOD)
+    before = (work / "init.sh").read_text()
+    loop.Run(work, f"ln -sf init.sh PROGRESS.md && {FIX_CALC}").go(max_sessions=1)
+    assert (work / "init.sh").read_text() == before
+    assert not (work / "PROGRESS.md").is_symlink()
+
+
+def test_rule_break_on_the_last_session_still_asks_a_human(tmp_path):
+    """Broken case: the spent session budget was checked first and hid the push."""
+    script = {"F01": [{"fault": "forbidden_command", "edits": {"calc.py": ADD}}]}
+    work, worker = make(tmp_path, script, max_sessions=1)
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    assert state(work)["pending"]["reason"] == "forbidden_command"
+
+
+def test_assume_unchanged_flag_fires_tamper(tmp_path):
+    """Broken case: `git update-index --assume-unchanged feature_list.json` hid an edit
+    to the feature list from `git status`. A worker can call the real git by its full
+    path, so the flag itself counts as tamper."""
+    import shutil
+
+    real_git = shutil.which("git")
+    work, _ = make(tmp_path, GOOD)
+    worker = (
+        f"{real_git} update-index --assume-unchanged feature_list.json && "
+        f"sed -i 's/false/true/g' feature_list.json && {FIX_CALC}"
+    )
+    assert loop.Run(work, worker).go() == "PENDING_APPROVAL"
+    assert sessions(work)[0]["rule"] == "tamper"
+    assert flags(work) == {"F01": False, "F02": False}
+    assert gitops.hidden_index_entries(work) == []
+
+
+def test_ignored_leftovers_are_removed_after_a_pass(tmp_path):
+    script = {
+        "F01": [
+            {
+                "fault": "hidden_dependency",
+                "edits": {"calc.py": ADD},
+                "hidden": {"local/scratch.txt": "x"},
+            }
+        ]
+    }
+    work, worker = make(tmp_path, script, evaluator="false")
+    loop.Run(work, worker).go(max_sessions=1)
+    assert flags(work)["F01"] is True
+    assert not (work / "local").exists()

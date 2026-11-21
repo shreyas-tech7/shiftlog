@@ -61,5 +61,14 @@ def run(
             os.killpg(proc.pid, signal.SIGKILL)
         except ProcessLookupError:
             pass
-        out, err = proc.communicate()
+        # A grandchild in its own session can keep the pipes open after the kill.
+        # Wait a little, then stop reading so the harness never hangs.
+        try:
+            out, err = proc.communicate(timeout=5)
+        except subprocess.TimeoutExpired:
+            for pipe_ in (proc.stdout, proc.stderr):
+                if pipe_:
+                    pipe_.close()
+            proc.wait(timeout=5)
+            out, err = "", ""
         return Result(-9, out or "", (err or "") + f"\ntimed out after {timeout}s", True)

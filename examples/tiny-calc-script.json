@@ -1,0 +1,50 @@
+{
+  "F01": [
+    {
+      "fault": "forbidden_command",
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\n"
+      },
+      "tokens": 1800
+    },
+    {
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\n"
+      },
+      "tokens": 1500
+    }
+  ],
+  "F02": [
+    {
+      "fault": "hidden_dependency",
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\nimport sys\nsys.path.insert(0, 'local')\nfrom helper import sub  # noqa\n"
+      },
+      "hidden": {
+        "local/helper.py": "def sub(a, b):\n    return a - b\n"
+      },
+      "tokens": 2100
+    },
+    {
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\ndef sub(a, b):\n    return a - b\n"
+      },
+      "tokens": 1600
+    }
+  ],
+  "F03": [
+    {
+      "fault": "break",
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\ndef sub(a, b):\n    return a - b\ndef mul(a, b):\n    return a + b\n"
+      },
+      "tokens": 1400
+    },
+    {
+      "edits": {
+        "calc.py": "def add(a, b):\n    return a + b\ndef sub(a, b):\n    return a - b\ndef mul(a, b):\n    return a * b\n"
+      },
+      "tokens": 1300
+    }
+  ]
+}

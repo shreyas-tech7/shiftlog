@@ -114,6 +114,7 @@ FIRST = {
 }
 LATER = {"none": 0.70, "break": 0.15, "claim_done": 0.05, "hidden_dependency": 0.10}
 APPROVALS_PER_SPEC = 4
+BURN = 10**8  # sessions at or above this are the token burn fault
 
 POLICY = """[budget]
 max_sessions = {max_sessions}
@@ -225,6 +226,9 @@ def run_one(tmp: Path, i: int, seed: int, evaluator: bool) -> dict:
         "final": state["machine"],
         "approvals": approvals,
         "tokens": state["tokens"],
+        "tokens_without_burn": sum(
+            s.get("tokens", 0) for s in sessions if s.get("tokens", 0) < BURN
+        ),
         "seconds": round(seconds, 2),
         "log_ok": ok,
         "faults_drawn": {k: v[0] for k, v in plan.items()},
@@ -270,7 +274,9 @@ def summarize(rows: list[dict], seed: int) -> dict:
             "sessions_per_completed_feature": round(
                 sum(r["sessions"] for r in rs) / max(done, 1), 3
             ),
-            "tokens_per_completed_feature": round(sum(r["tokens"] for r in rs) / max(done, 1), 1),
+            "tokens_per_completed_feature": round(
+                sum(r["tokens_without_burn"] for r in rs) / max(done, 1), 1
+            ),
             "seconds_per_spec": round(per_spec(rs, "seconds"), 2),
             "logs_intact": all(r["log_ok"] for r in rs),
         }
@@ -310,3 +316,15 @@ def _cpu() -> str:
     except OSError:
         pass
     return platform.processor() or "unknown"
+
+
+def export_specs(folder: str | Path) -> list[Path]:
+    """Write the 30 benchmark specs as plain files, so a reader can see them."""
+    folder = Path(folder)
+    folder.mkdir(parents=True, exist_ok=True)
+    out = []
+    for i in range(1, N_SPECS + 1):
+        p = folder / f"bench-{i:02d}.md"
+        p.write_text(spec_text(i)[0])
+        out.append(p)
+    return out
