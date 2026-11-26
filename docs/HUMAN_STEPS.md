@@ -19,7 +19,7 @@ Branch: `claude/build-shiftlog`
    Or create a pre-release named `v0.1.0-rc1` on that commit on the Releases page.
 4. Run the secret scan once more: `gitleaks git -v .` in a fresh clone.
 5. Rename the repo from `shiftlog` to `gatedcrew` in Settings, General, if you want the repo and the package to share a name. `shiftlog` is taken on npm, so the package is `gatedcrew` (see `BLOCKERS.md`). GitHub redirects the old URL. Then change the clone URL and the badge in the README.
-6. Make the repo public in Settings, General, Danger zone. All history becomes public at that moment. Only Shreyas decides this.
+6. Make the repo public. Done 2026-11-26: the repo is public.
 7. Turn on Pages in Settings, Pages, from `main` and the `/docs` folder. The results page is `docs/index.html`.
 8. Upload `docs/social-preview.png` in Settings, General, Social preview.
 9. Fill in the About box with the text in `docs/GITHUB_ABOUT.md` and the topics in `docs/topics.txt`, if they are not already set.
@@ -39,5 +39,5 @@ Branch: `claude/build-shiftlog`
 
     The agent needs its own sign-in or API key, which you add yourself. Watch the run. Read `PENDING_APPROVAL.md` when a gate fires, then `gatedcrew approve` or `gatedcrew reject`. Commit `docs/REAL_RUN.md` if you want the recorded run in the repo.
 13. Decide whether `docs/build/BUILD_PROMPT.md` stays public.
-14. After the merge, change the CI badge in the README from `?branch=claude/build-shiftlog` to `?branch=main`.
+14. Point the CI badge in the README at `main`. Done 2026-11-26.
 15. Mark the human checks in the README as done once you have read the code and run `./init.sh` yourself.
