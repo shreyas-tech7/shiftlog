@@ -1,8 +1,8 @@
 # gatedcrew
 
-[![CI](https://github.com/shreyas-tech7/shiftlog/actions/workflows/ci.yml/badge.svg?branch=claude/build-shiftlog)](https://github.com/shreyas-tech7/shiftlog/actions/workflows/ci.yml)
+[![CI](https://github.com/shreyas-tech7/shiftlog/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/shreyas-tech7/shiftlog/actions/workflows/ci.yml)
 
-**Status:** release candidate v0.1.0-rc1. Private repo. The working title was `shiftlog`. The package and command are `gatedcrew`, because `shiftlog` is taken on npm.
+**Status:** release candidate v0.1.0-rc1. The working title was `shiftlog`. The package and command are `gatedcrew`, because `shiftlog` is taken on npm.
 
 gatedcrew runs a coding agent in short, logged sessions under written rules for budgets and approvals. A long unattended run stays safe to leave and easy to review in the morning.
 

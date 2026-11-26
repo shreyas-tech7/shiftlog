@@ -9,7 +9,7 @@
 - Audit log hash chain with tamper tests. Daily report.
 - Benchmark on seeds 1 and 2, generated README and results page, demo, docs, CI, social preview.
 - Release check: outside check, code and security review, scans, mutation checks. All findings fixed or logged. See docs/RELEASE_CHECK.md.
-- Hand-off: CHANGELOG, docs/HUMAN_STEPS.md, docs/handoff/COWORK_PROMPT.md, real-agent adapter in examples/.
+- Hand-off: CHANGELOG, docs/HUMAN_STEPS.md, real-agent adapter in examples/.
 
 ## Next
 - Human steps only, in docs/HUMAN_STEPS.md: create `main`, open and merge the pull request, tag v0.1.0-rc1, first run with a real agent.

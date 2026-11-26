@@ -187,10 +187,10 @@
   {
     "id": "F21",
     "area": "release",
-    "description": "Hand-off: CHANGELOG with release SHA, HUMAN_STEPS, COWORK_PROMPT",
+    "description": "Hand-off: CHANGELOG with release SHA, HUMAN_STEPS",
     "steps": [
       "grep -q 'v0.1.0-rc1' CHANGELOG.md",
-      "test -f docs/handoff/COWORK_PROMPT.md"
+      "test -f docs/HUMAN_STEPS.md"
     ],
     "passes": true
   },

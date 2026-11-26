@@ -25,7 +25,6 @@ REQUIRED = [
     "docs/WALKTHROUGH.md",
     "docs/INTERVIEW_QA.md",
     "docs/HUMAN_STEPS.md",
-    "docs/handoff/COWORK_PROMPT.md",
     "docs/build/BUILD_PROMPT.md",
     "DECISIONS.md",
     ".env.example",
@@ -69,7 +68,6 @@ def prose_files():
     files += [
         ROOT / "CONTRIBUTING.md",
         ROOT / "CHANGELOG.md",
-        ROOT / "docs/handoff/COWORK_PROMPT.md",
     ]
     return files
 
